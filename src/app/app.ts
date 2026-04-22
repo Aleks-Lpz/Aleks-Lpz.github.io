@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common'; // <--- FALTA ESTA LÍNEA
 import { DataService } from './servicios/data';
 
 @Component({
   selector: 'app-root',
-  standalone: true, // Esto es lo que causa el conflicto con declarations
-  imports: [CommonModule], // Para que el *ngIf funcione si no usas @if
+  standalone: true,
+  imports: [CommonModule], // Ahora sí reconocerá qué es CommonModule
   templateUrl: './app.html',
   styleUrls: ['./app.scss']
 })
-export class AppComponent implements OnInit { // Verifica que diga AppComponent
+export class AppComponent implements OnInit {
   miPersona: any;
 
   constructor(private dataService: DataService) {}
