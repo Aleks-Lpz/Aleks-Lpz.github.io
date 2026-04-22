@@ -1,3 +1,4 @@
+// src/app/app.ts
 import { Component, OnInit } from '@angular/core';
 import { DataService } from './servicios/data';
 
@@ -7,13 +8,11 @@ import { DataService } from './servicios/data';
   styleUrls: ['./app.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'Aleks.github.io';
-  miPersona: any; // Aquí se guardará la info de la guía
+  miPersona: any;
 
   constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
-    // Llamamos al servicio para obtener los datos
     this.dataService.getDatos().subscribe(data => {
       this.miPersona = data;
     });
