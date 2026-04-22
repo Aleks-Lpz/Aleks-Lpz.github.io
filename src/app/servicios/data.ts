@@ -1,17 +1,46 @@
-// src/app/servicios/data.ts
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Firestore, collection, collectionData } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-  // Asegúrate de tener HttpClientModule en tu app-module.ts
-  constructor(private http: HttpClient) { }
+  constructor(private firestore: Firestore) {}
 
-  getDatos(): Observable<any> {
-    // La guía suele usar un JSON en assets para simular la DB
-   return this.http.get('data/persona.json');
+  // Métodos para obtener cada colección
+  getHeader(): Observable<any[]> {
+    const ref = collection(this.firestore, 'header');
+    return collectionData(ref);
+  }
+
+  getWorkExperience(): Observable<any[]> {
+    const ref = collection(this.firestore, 'work-experience');
+    return collectionData(ref);
+  }
+
+  getEducation(): Observable<any[]> {
+    const ref = collection(this.firestore, 'education');
+    return collectionData(ref);
+  }
+
+  getSkills(): Observable<any[]> {
+    const ref = collection(this.firestore, 'skills');
+    return collectionData(ref);
+  }
+
+  getCertificates(): Observable<any[]> {
+    const ref = collection(this.firestore, 'certificates');
+    return collectionData(ref);
+  }
+
+  getLanguages(): Observable<any[]> {
+    const ref = collection(this.firestore, 'languages');
+    return collectionData(ref);
+  }
+
+  getInterests(): Observable<any[]> {
+    const ref = collection(this.firestore, 'interests');
+    return collectionData(ref);
   }
 }

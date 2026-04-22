@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core'; // Agregamos ChangeDetectorRef
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataService } from './servicios/data';
 
@@ -10,19 +10,24 @@ import { DataService } from './servicios/data';
   styleUrls: ['./app.scss']
 })
 export class AppComponent implements OnInit {
-  miPersona: any;
+  header: any;
+  workExperience: any[] = [];
+  education: any[] = [];
+  skills: any[] = [];
+  certificates: any[] = [];
+  languages: any[] = [];
+  interests: any[] = [];
 
-  // Inyectamos el detector de cambios
   constructor(private dataService: DataService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    this.dataService.getDatos().subscribe({
-      next: (data) => {
-        this.miPersona = data;
-        this.cdr.detectChanges(); // <--- FORZAMOS LA VISTA
-        console.log('Datos cargados en variable:', this.miPersona);
-      },
-      error: (err) => console.error('Error al asignar datos:', err)
-    });
+    // Suscripción masiva a todas las colecciones
+    this.dataService.getHeader().subscribe(res => { this.header = res[0]; this.cdr.detectChanges(); });
+    this.dataService.getWorkExperience().subscribe(res => { this.workExperience = res; this.cdr.detectChanges(); });
+    this.dataService.getEducation().subscribe(res => { this.education = res; this.cdr.detectChanges(); });
+    this.dataService.getSkills().subscribe(res => { this.skills = res; this.cdr.detectChanges(); });
+    this.dataService.getCertificates().subscribe(res => { this.certificates = res; this.cdr.detectChanges(); });
+    this.dataService.getLanguages().subscribe(res => { this.languages = res; this.cdr.detectChanges(); });
+    this.dataService.getInterests().subscribe(res => { this.interests = res; this.cdr.detectChanges(); });
   }
 }
