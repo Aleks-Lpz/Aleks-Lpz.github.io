@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core'; // Agregamos ChangeDetectorRef
 import { CommonModule } from '@angular/common';
 import { DataService } from './servicios/data';
 
@@ -12,15 +12,17 @@ import { DataService } from './servicios/data';
 export class AppComponent implements OnInit {
   miPersona: any;
 
-  constructor(private dataService: DataService) {}
+  // Inyectamos el detector de cambios
+  constructor(private dataService: DataService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.dataService.getDatos().subscribe({
       next: (data) => {
         this.miPersona = data;
-        console.log('Datos cargados:', data);
+        this.cdr.detectChanges(); // <--- FORZAMOS LA VISTA
+        console.log('Datos cargados en variable:', this.miPersona);
       },
-      error: (err) => console.error('Error al cargar JSON:', err)
+      error: (err) => console.error('Error al asignar datos:', err)
     });
   }
 }
