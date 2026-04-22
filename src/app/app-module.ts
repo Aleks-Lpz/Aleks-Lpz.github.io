@@ -1,20 +1,21 @@
-import { NgModule, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http'; // Importante para el servicio
+import { CommonModule } from '@angular/common'; // Para que funcione el *ngIf
 
-import { AppRoutingModule } from './app-routing-module';
-import { App } from './app';
+import { AppComponent } from './app'; // Cambia 'App' por 'AppComponent'
 
 @NgModule({
   declarations: [
-    App
+    // DEJA ESTO VACÍO (borra AppComponent de aquí)
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    HttpClientModule,
+    CommonModule,
+    AppComponent // PONLO AQUÍ, como un import
   ],
-  providers: [
-    provideBrowserGlobalErrorListeners(),
-  ],
-  bootstrap: [App]
+  providers: [],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
