@@ -1,12 +1,15 @@
-<main class="main">
-  <div class="content" *ngIf="miPersona">
+<div class="cv-container">
+  @if (miPersona) {
     <header>
       <h1>{{ miPersona.nombre }} {{ miPersona.apellido }}</h1>
-      <p>{{ miPersona.domicilio }} | {{ miPersona.telefono }}</p>
+      <p><strong>Ubicación:</strong> {{ miPersona.domicilio }}</p>
+      <p><strong>Teléfono:</strong> {{ miPersona.telefono }}</p>
     </header>
 
-    <section class="profile-pic">
-      <img [src]="miPersona.foto" alt="Foto de Aleks" width="150">
+    <section class="foto-perfil">
+      <img [src]="miPersona.foto" alt="Foto de perfil" width="150">
     </section>
-  </div>
-</main>
+  } @else {
+    <p>Cargando datos del CV...</p>
+  }
+</div>
